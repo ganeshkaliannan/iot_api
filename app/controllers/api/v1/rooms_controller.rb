@@ -8,10 +8,10 @@ class Api::V1::RoomsController < ApplicationController
   # put /v1/rooms/update_status?id=<room_id>&status=<motion sensor status>
   def update_status
     @room = Room.find(params[:id])
-    if params[:status].to_i == 1
+    if params[:status].to_i == 1 && @room.status == false
       @room.update!(status: 1)
       @room.room_details.create!({in_time: Time.now})
-    elsif @room.room_details.present?
+    elsif params[:status].to_i == 0 && @room.room_details.present? && @room.status == true
       @room.update!(status: 0)
       @room.room_details.last.update!({out_time: Time.now})
     end

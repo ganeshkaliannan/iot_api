@@ -40,14 +40,14 @@ def check_room(room):
 
     if curr_status==0 and curr_status!=prev_status: #When output from motion sensor is LOW
       print room.room_name, "Available", '@', time.ctime()
-      data = {'id': room.room_id, status: curr_status}
+      data = {'id': room.room_id, 'status': curr_status}
       requests.put(API_DOMAIN + '/v1/rooms/update_status', headers=headers, params=data)
       GPIO.output(room.green, 0) #Turn OFF LED
       GPIO.output(room.red, 1)
 
     elif curr_status==1 and curr_status!=prev_status: #When output from motion sensor is HIGH
       print room.room_name, "Occupied", '@', time.ctime()
-      data = {'id': room.room_id, status: curr_status}
+      data = {'id': room.room_id, 'status': curr_status}
       requests.put(API_DOMAIN + '/v1/rooms/update_status', headers=headers, params=data)
       GPIO.output(room.green, 1) #Turn ON LED
       GPIO.output(room.red, 0)
