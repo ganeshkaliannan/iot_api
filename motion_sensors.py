@@ -38,7 +38,7 @@ def check_room(room):
 
     while True:
         curr_status = GPIO.input(room.room_output_pin)
-
+        time.sleep(30)
         if curr_status == 0 and curr_status != prev_status:  # When output from motion sensor is LOW
             print (room.room_name, "Available", '@', time.ctime())
             data = {'id': room.room_id, 'status': curr_status}
