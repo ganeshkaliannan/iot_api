@@ -62,7 +62,7 @@ def check_room(room):
 
 # Creating instances for Room object and checking the status parallel.
 response = requests.get(API_DOMAIN + '/v1/rooms')
-rooms = response.content.json()
+rooms = json.loads(response.content.decode('utf-8'))
 
 room1 = Room(1, rooms[0]['name'], 11, 7, 8)
 room2 = Room(2, rooms[1]['name'], 15, 35, 36)
